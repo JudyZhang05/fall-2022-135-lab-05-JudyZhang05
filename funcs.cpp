@@ -5,11 +5,11 @@
 
 bool isDivisibleBy(int n, int d){
 
-    if (n % d == 0){
-        return true;
+    if (d == 0 || n % d != 0 ){
+        return false;
     }
     else{
-        return false;
+        return true;
     }
 }
 
@@ -52,6 +52,12 @@ int nextPrime(int n){
 }
 
 int countPrimes(int a, int b){
+
+    if ( a > b ){
+        int temp1 = a; int temp2 = b;
+        a = temp2; b = temp1;
+    }
+    
     bool outcome = false; int num = 0; int result = 0;
     
     while (a != b){
@@ -74,7 +80,7 @@ int countPrimes(int a, int b){
 }
 
 bool isTwinPrime(int n){
-    bool prime = false;
+    bool prime = false; bool result = false; bool loop = false;
     
     for ( int i = 2; i < n - 1; i++){
         if ( n % i == 0 ){
@@ -82,13 +88,14 @@ bool isTwinPrime(int n){
         }
     }
     if (prime > 0  || n < 2){
-        return false;
+        result = false;
+        loop = true;
     }
     else{
         prime = true;
     }
 
-    int twin = n + 2; bool outcome = false; bool loop = false; int num = 0;
+    int twin = n + 2; bool outcome = false;  int num = 0; 
     
     while (loop == false){
         if (twin == n - 2){
@@ -109,8 +116,12 @@ bool isTwinPrime(int n){
         num = 0;
     }
         if (outcome == true){
-            return true;
+            result = true;
         }
+        else{
+            result = false;
+        }
+    return result;
 }
 
 int nextTwinPrime(int n){
@@ -131,7 +142,7 @@ int nextTwinPrime(int n){
         }
     }
 
-    int twin = n + 2; bool outcome = false; bool loop = false; int num = 0;
+    int twin = n + 2; bool outcome = false; bool loop = false; int num = 0; int result;
     
     while (loop == false){
         if (twin == n - 2){
@@ -152,14 +163,21 @@ int nextTwinPrime(int n){
         num = 0;
     }
         if (outcome == true){
-            return true;
+            result = n;
         }
         else{
-            return false;
+            result = n;
         }
+    return result;
 }
 
 int largestTwinPrime(int a, int b){
+
+    if ( a > b ){
+        int temp1 = a; int temp2 = b;
+        a = temp2; b = temp1;
+    }
+
     bool prime = false; int result; int greater = 0; int valid = 0; int length = b-a;
     
     while ( a < b ){
@@ -207,7 +225,7 @@ int largestTwinPrime(int a, int b){
                 valid = 0;
             }
             else if (valid == length && a == b){
-                return -1;
+                result = -1;
             }
             else{
                 valid+=1;
